@@ -14,6 +14,7 @@
             <p>{{ loadingMessage }}</p>
         </div>
         <template v-else>
+            <!-- Header -->
             <div class="wallet-header">
                 <h1>Filecoin Wallet</h1>
                 <div class="address-badge">
@@ -21,6 +22,8 @@
                     <button @click="copyAddress" class="copy-button">Copy Address</button>
                 </div>
             </div>
+
+            <!-- Wallet Details -->
             <div class="wallet-details">
                 <div class="detail-item">
                     <strong>Private Key:</strong>
@@ -42,6 +45,8 @@
                 </div>
                 <button @click="resetWallet" class="reset-wallet-button">Reset Wallet</button>
             </div>
+
+            <!-- Transaction Section -->
             <div class="transaction-section">
                 <h2>Send FIL</h2>
                 <input v-model="recipient" placeholder="Recipient Address" class="input-field" />
