@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filecoin Wallet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="app.js" defer></script>
+</head>
+<body>
+    <div id="app">
+        <div v-if="isLoading" class="loading-overlay">
+            <div class="spinner"></div>
+            <p>{{ loadingMessage }}</p>
+        </div>
+        <template v-else>
+            <div class="wallet-header">
+                <h1>Filecoin Wallet</h1>
+                <div class="address-badge">
+                    <span>{{ shortenAddress(walletAddress) }}</span>
+                    <button @click="copyAddress" class="copy-button">Copy Address</button>
+                </div>
+            </div>
+            <div class="wallet-details">
+                <div class="detail-item">
+                    <strong>Private Key:</strong>
+                    <span v-if="showPrivateKey">{{ privateKey }}</span>
+                    <span v-else>••••••••••••••••••••••</span>
+                    <button @click="togglePrivateKey" class="toggle-button">
+                        {{ showPrivateKey ? 'Hide' : 'Show' }}
+                    </button>
+                    <button @click="copyPrivateKey" class="copy-button">Copy</button>
+                </div>
+                <div class="detail-item">
+                    <strong>Mnemonic (Recovery Phrase):</strong>
+                    <span v-if="showMnemonic">{{ mnemonic }}</span>
+                    <span v-else>•••••• •••••• •••••• ••••••</span>
+                    <button @click="toggleMnemonic" class="toggle-button">
+                        {{ showMnemonic ? 'Hide' : 'Show' }}
+                    </button>
+                    <button @click="copyMnemonic" class="copy-button">Copy</button>
+                </div>
+                <button @click="resetWallet" class="reset-wallet-button">Reset Wallet</button>
+            </div>
+            <div class="transaction-section">
+                <h2>Send FIL</h2>
+                <input v-model="recipient" placeholder="Recipient Address" class="input-field" />
+                <input v-model="amount" type="number" placeholder="Amount" class="input-field" />
+                <button @click="sendFunds" class="send-button">Send</button>
+            </div>
+        </template>
+    </div>
+</body>
+</html>
